@@ -1,6 +1,6 @@
 {
   "name": "cylon-test-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "cylon.js bot which creates, stores, and hosts fake data for testing.",
   "repository": "https://github.com/7yl4r/cylon-test-bot",
   "dependencies": {
@@ -8,7 +8,12 @@
     "cylon-api-http": "^0.4.0",
     "nedb": "^1.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
+  },
   "scripts": {
     "pretest": "./node_modules/.bin/coffeelint -f coffeelint.json -r ng-modules",
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/*.test.coffee"
