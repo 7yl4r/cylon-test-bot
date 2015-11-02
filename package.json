@@ -1,0 +1,16 @@
+{
+  "name": "cylon-test-bot",
+  "version": "0.0.1",
+  "description": "cylon.js bot which creates, stores, and hosts fake data for testing.",
+  "repository": "https://github.com/7yl4r/cylon-test-bot",
+  "dependencies": {
+    "cylon": "^1.2.0",
+    "cylon-api-http": "^0.4.0",
+    "nedb": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "pretest": "./node_modules/.bin/coffeelint -f coffeelint.json -r ng-modules",
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/*.test.coffee"
+  }
+}
