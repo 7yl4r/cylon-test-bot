@@ -5,7 +5,7 @@ var Datastore = require('nedb');
 var db = new Datastore();
 
 var SENSOR_NAME = 'test-sensor';
-
+var DATA_LOG_MAX_LEN = 10;
 
 // set up robot 
 var Cylon = require("cylon");
@@ -35,13 +35,29 @@ Cylon.robot({
 
             db.insert(doc, function (err, newDoc) {   // Callback is optional
               // newDoc is the newly inserted document, including its _id
-                console.log('added sensor val: ', newDoc.val); 
+                console.log('add sensor val: ', newDoc.val); 
+
+                // check # of documents existing
+                db.count({ sensor: SENSOR_NAME }, function (err, count) {
+                    // if too many
+                    if ( count > DATA_LOG_MAX_LEN ) {
+                        // remove oldest
+                        db.find({sensor: SENSOR_NAME}).sort({t: 1}).exec(function(err, docs){
+                            var d = docs[0];
+                            var oldId = d._id;
+                            console.log('data log limit. purging ' + d.val + ' from ' + d.t);
+                            db.remove({_id: oldId}, {}, function (err, numRemoved) {
+                                console.log(numRemoved + ' removed. ' + err);
+                            });
+                        });
+                        
+                    }
+                });
             });
 
         });
 
-        after((5).seconds(), function() {
-            console.log("I've been at your command for 5 seconds now.");
+        every((5).seconds(), function() {
             console.log("collected data:");
             db.find({ sensor: SENSOR_NAME }, function (err, docs) {
                 console.log(docs);
