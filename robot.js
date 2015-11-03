@@ -9,18 +9,19 @@ Cylon.robot({
     name: "cylon-test-bot",
 
     connections: {
-        loopback: { adaptor: "loopback" }
+        //loopback: { adaptor: "loopback" }
     },
 
     devices: {
-        ping: { driver: "ping" }
+        //ping: { driver: "ping" }
     },
     
     functionFired: false,
 
     work: function(my) {
         after((5).seconds(), function() {
-            functionFired = true;
+            console.log("5 seconds have passed");
+            my.functionFired = true;
         });
     }
 });
