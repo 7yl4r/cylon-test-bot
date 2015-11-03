@@ -21,23 +21,14 @@ require('../robot.js');
 describe("cylon-test-bot", function() {
   var robot = Cylon.robots["cylon-test-bot"];
 
-  it("should have work", function() {
-    expect(robot.work).to.be.a('function');
+  it("should have functionFired == false @ t<5s", function() {
+    clock.tick(1000);
+    expect(robot.functionFired).to.be.false;
   });
 
-  it("should have data after a few seconds", function() {
+  it("should have functionFired == true @ t>5s", function() {
     clock.tick(10000);
-    var db = robot.db;
-    db.count({ sensor: SENSOR_NAME }, function (err, count) {
-      expect(count).to.be.above(0);
-    });
+    expect(robot.functionFired).to.be.true;
   });
-
-  it("should not have above log size limit after long time", function() {
-    clock.tick(30000);
-    var db = robot.db;
-    db.count({ sensor: robot.SENSOR_NAME }, function (err, count) {
-      expect(count).to.be.below(robot.DATA_LOG_MAX_LEN);
-    });
-  });
+ 
 });
