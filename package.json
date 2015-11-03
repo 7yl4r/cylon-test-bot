@@ -15,7 +15,6 @@
     "sinon-chai": "^2.8.0"
   },
   "scripts": {
-    "pretest": "./node_modules/.bin/coffeelint -f coffeelint.json -r ng-modules",
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/*.test.coffee"
+    "test": "./node_modules/.bin/mocha"
   }
 }

@@ -50,11 +50,9 @@ Cylon.robot({
                                 console.log(numRemoved + ' removed. ' + err);
                             });
                         });
-                        
                     }
                 });
             });
-
         });
 
         every((5).seconds(), function() {
